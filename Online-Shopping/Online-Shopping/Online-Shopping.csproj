@@ -133,6 +133,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -148,6 +151,79 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="HtmlAdminTemplate\404.html" />
+    <Content Include="HtmlAdminTemplate\blank.html" />
+    <Content Include="HtmlAdminTemplate\buttons.html" />
+    <Content Include="HtmlAdminTemplate\charts.html" />
+    <Content Include="HtmlAdminTemplate\css\bootstrap.css" />
+    <Content Include="HtmlAdminTemplate\css\demo-page.css" />
+    <Content Include="HtmlAdminTemplate\css\examples.css" />
+    <Content Include="HtmlAdminTemplate\css\font-awesome.css" />
+    <Content Include="HtmlAdminTemplate\css\geochart.css" />
+    <Content Include="HtmlAdminTemplate\css\hover.css" />
+    <Content Include="HtmlAdminTemplate\css\magnific-popup.css" />
+    <Content Include="HtmlAdminTemplate\css\style.css" />
+    <Content Include="HtmlAdminTemplate\fonts\fontawesome-webfont.svg" />
+    <Content Include="HtmlAdminTemplate\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="HtmlAdminTemplate\grids.html" />
+    <Content Include="HtmlAdminTemplate\icons.html" />
+    <Content Include="HtmlAdminTemplate\images\1.jpg" />
+    <Content Include="HtmlAdminTemplate\images\404.png" />
+    <Content Include="HtmlAdminTemplate\images\b3.png" />
+    <Content Include="HtmlAdminTemplate\images\climate.jpg" />
+    <Content Include="HtmlAdminTemplate\images\close.png" />
+    <Content Include="HtmlAdminTemplate\images\ftr-icons.png" />
+    <Content Include="HtmlAdminTemplate\images\icon.png" />
+    <Content Include="HtmlAdminTemplate\images\login.jpg" />
+    <Content Include="HtmlAdminTemplate\images\mess.png" />
+    <Content Include="HtmlAdminTemplate\images\next.png" />
+    <Content Include="HtmlAdminTemplate\images\p1.png" />
+    <Content Include="HtmlAdminTemplate\images\p2.png" />
+    <Content Include="HtmlAdminTemplate\images\p3.png" />
+    <Content Include="HtmlAdminTemplate\images\p4.png" />
+    <Content Include="HtmlAdminTemplate\images\p5.png" />
+    <Content Include="HtmlAdminTemplate\images\p6.png" />
+    <Content Include="HtmlAdminTemplate\images\p7.png" />
+    <Content Include="HtmlAdminTemplate\images\p8.png" />
+    <Content Include="HtmlAdminTemplate\images\prev.png" />
+    <Content Include="HtmlAdminTemplate\images\pro1.jpg" />
+    <Content Include="HtmlAdminTemplate\images\pro10.jpg" />
+    <Content Include="HtmlAdminTemplate\images\pro12.jpg" />
+    <Content Include="HtmlAdminTemplate\images\pro2.jpg" />
+    <Content Include="HtmlAdminTemplate\images\pro3.jpg" />
+    <Content Include="HtmlAdminTemplate\images\pro4.jpg" />
+    <Content Include="HtmlAdminTemplate\images\pro5.jpg" />
+    <Content Include="HtmlAdminTemplate\images\pro6.jpg" />
+    <Content Include="HtmlAdminTemplate\images\pro7.jpg" />
+    <Content Include="HtmlAdminTemplate\images\pro8.jpg" />
+    <Content Include="HtmlAdminTemplate\images\pro9.jpg" />
+    <Content Include="HtmlAdminTemplate\images\reg.png" />
+    <Content Include="HtmlAdminTemplate\images\search.png" />
+    <Content Include="HtmlAdminTemplate\images\shoppy.jpg" />
+    <Content Include="HtmlAdminTemplate\images\tick.png" />
+    <Content Include="HtmlAdminTemplate\images\visit.png" />
+    <Content Include="HtmlAdminTemplate\inbox-details.html" />
+    <Content Include="HtmlAdminTemplate\inbox.html" />
+    <Content Include="HtmlAdminTemplate\index.html" />
+    <Content Include="HtmlAdminTemplate\js\bars.js" />
+    <Content Include="HtmlAdminTemplate\js\bootstrap.js" />
+    <Content Include="HtmlAdminTemplate\js\Chart.min.js" />
+    <Content Include="HtmlAdminTemplate\js\chartinator.js" />
+    <Content Include="HtmlAdminTemplate\js\gmaps.js" />
+    <Content Include="HtmlAdminTemplate\js\jquery-2.1.1.min.js" />
+    <Content Include="HtmlAdminTemplate\js\jquery.magnific-popup.js" />
+    <Content Include="HtmlAdminTemplate\js\jquery.nicescroll.js" />
+    <Content Include="HtmlAdminTemplate\js\modernizr.min.js" />
+    <Content Include="HtmlAdminTemplate\js\nivo-lightbox.min.js" />
+    <Content Include="HtmlAdminTemplate\js\scripts.js" />
+    <Content Include="HtmlAdminTemplate\js\skycons.js" />
+    <Content Include="HtmlAdminTemplate\login.html" />
+    <Content Include="HtmlAdminTemplate\maps.html" />
+    <Content Include="HtmlAdminTemplate\portlet.html" />
+    <Content Include="HtmlAdminTemplate\price.html" />
+    <Content Include="HtmlAdminTemplate\product.html" />
+    <Content Include="HtmlAdminTemplate\signup.html" />
+    <Content Include="HtmlAdminTemplate\typography.html" />
     <Content Include="HtmlTemplate\about.html" />
     <Content Include="HtmlTemplate\beverages.html" />
     <Content Include="HtmlTemplate\checkout.html" />
@@ -273,6 +349,21 @@
     <Content Include="HtmlTemplate\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="HtmlTemplate\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="HtmlTemplate\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="HtmlAdminTemplate\fonts\fontawesome-webfont.eot" />
+    <Content Include="HtmlAdminTemplate\fonts\fontawesome-webfont.ttf" />
+    <Content Include="HtmlAdminTemplate\fonts\fontawesome-webfont.woff" />
+    <Content Include="HtmlAdminTemplate\fonts\fontawesome-webfont.woff2" />
+    <Content Include="HtmlAdminTemplate\fonts\FontAwesome.otf" />
+    <Content Include="HtmlAdminTemplate\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="HtmlAdminTemplate\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="HtmlAdminTemplate\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="HtmlAdminTemplate\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_SidePanel.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_adminHeader.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\AddProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\ViewProduct.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -298,9 +389,14 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_NevigationMenu.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_adminLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -315,6 +411,12 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">
+      <Project>{16655a26-78d1-47e2-8e26-cc11f1cd6cb0}</Project>
+      <Name>BusinessLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
