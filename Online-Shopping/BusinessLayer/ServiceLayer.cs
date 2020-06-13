@@ -19,10 +19,11 @@ namespace BusinessLayer
         public bool InsertProduct(ProductDetails productDetails)
         {
             return repository.InsertProduct(productDetails);
-        }
-        public DataTable GetProductDetails()
+        }        
+        
+        public bool AdminAuthentications(string userName,string Password)
         {
-            return repository.GetProductDetail();
+            return repository.AdminAuthentication(userName, Password);
         }
     }
 }

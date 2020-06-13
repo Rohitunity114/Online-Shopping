@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Odbc;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -26,15 +27,5 @@ namespace BusinessLayer
             return cmd;
         }
 
-        public DataTable GetCommandDataTable(SqlCommand cmd)
-        {
-            if(con.State!= ConnectionState.Open) con.Open();
-            
-            SqlDataReader dr = cmd.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(dr);
-            con.Close();
-            return dt;
-        }
     }
 }
