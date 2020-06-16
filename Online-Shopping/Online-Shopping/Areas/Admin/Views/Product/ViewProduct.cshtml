@@ -43,6 +43,7 @@
         @foreach (var item in Model)
         {
             <tr>
+                @Html.HiddenFor(modelItem => item.ProductId)
                 <td>
                     @Html.DisplayFor(modelItem => item.ProductName)
                 </td>
@@ -77,6 +78,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SubCategory)
+                </td>
+                <td>
+                    @Html.ActionLink("Update", "UpdateProduct", new { id = item.ProductId })
                 </td>
             </tr>
         }

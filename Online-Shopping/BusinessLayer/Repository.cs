@@ -14,14 +14,31 @@ namespace BusinessLayer
         public bool InsertProduct(ProductDetails productDetails)
         {
             SqlCommand cmd = GetCommand("spInsertProduct");
-            cmd.Parameters.AddWithValue("@Product_Name", productDetails.ProductName);
-            cmd.Parameters.AddWithValue("@Product_Description", productDetails.ProductDescription);
+            cmd.Parameters.AddWithValue("@ProductName", productDetails.ProductName);
+            cmd.Parameters.AddWithValue("@ProductDescription", productDetails.ProductDescription);
             cmd.Parameters.AddWithValue("@Quantity", productDetails.Quantity);
             cmd.Parameters.AddWithValue("@Image", productDetails.Image);
-            cmd.Parameters.AddWithValue("@Strike_Cost", productDetails.StrikeCost);
-            cmd.Parameters.AddWithValue("@Product_Cost", productDetails.ProductCost);
-            cmd.Parameters.AddWithValue("@Main_Category", productDetails.MainCategory);
-            cmd.Parameters.AddWithValue("@Sub_Category", productDetails.SubCategory);
+            cmd.Parameters.AddWithValue("@StrikeCost", productDetails.StrikeCost);
+            cmd.Parameters.AddWithValue("@ProductCost", productDetails.ProductCost);
+            cmd.Parameters.AddWithValue("@MainCategory", productDetails.MainCategory);
+            cmd.Parameters.AddWithValue("@SubCategory", productDetails.SubCategory);
+            int rowAffected = cmd.ExecuteNonQuery();
+            con.Close();
+            return rowAffected > 0 ? true : false;
+        }
+
+        public bool UpdateProduct(ProductDetails productDetails)
+        {
+            SqlCommand cmd = GetCommand("spUpdateProduct");
+            cmd.Parameters.AddWithValue("@productId", productDetails.ProductId);
+            cmd.Parameters.AddWithValue("@ProductName", productDetails.ProductName);
+            cmd.Parameters.AddWithValue("@ProductDescription", productDetails.ProductDescription);
+            cmd.Parameters.AddWithValue("@Quantity", productDetails.Quantity);
+            cmd.Parameters.AddWithValue("@Image", productDetails.Image);
+            cmd.Parameters.AddWithValue("@StrikeCost", productDetails.StrikeCost);
+            cmd.Parameters.AddWithValue("@ProductCost", productDetails.ProductCost);
+            cmd.Parameters.AddWithValue("@MainCategory", productDetails.MainCategory);
+            cmd.Parameters.AddWithValue("@SubCategory", productDetails.SubCategory);
             int rowAffected = cmd.ExecuteNonQuery();
             con.Close();
             return rowAffected > 0 ? true : false;

@@ -12,11 +12,13 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using PagedList.Mvc;
+using System.Web.Security;
 
 namespace Online_Shopping.Areas.Admin.Controllers
 {
     public class ProductController : Controller
     {
+        [Authorize]
         // GET: Admin/Product
         public ActionResult ViewProduct(int? page)
         {
@@ -47,38 +49,79 @@ namespace Online_Shopping.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult AddProduct()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult AddProduct(ProductDetails productDetails)
         {
             ServiceLayer serviceLayer = new ServiceLayer();
             serviceLayer.InsertProduct(productDetails);
-            return RedirectToAction("ViewProduct");
+            return RedirectToAction("AddProduct");
         }
+       
+        public ActionResult UpdateProduct(int id)
+        {
+            
+            DataTable dt = new DataTable();
+            using (var cn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("Select * from Products where ProductId=@ProductId", cn);
+                cmd.Parameters.AddWithValue("@ProductId", id);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+               
+                da.Fill(ds);
+                return View(ds);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UpdateProduct(ProductDetails productDetails)
+        {
+            ServiceLayer serviceLayer = new ServiceLayer();
+            serviceLayer.UpdateProduct(productDetails);
+            return RedirectToAction("AddProduct");
+        }
+
+
+
 
         [HttpGet]
         public ActionResult AdminLogin()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult AdminLogin(string UserName,string Password)
         {
+
             ServiceLayer serviceLayer = new ServiceLayer();
             bool str = serviceLayer.AdminAuthentications(UserName, Password);
-            if(str)
+            if (str)
             {
-                return RedirectToAction("ViewProduct");
+                FormsAuthentication.SetAuthCookie(UserName, false);
+                return RedirectToAction("Index","Admin");
             }
             else
             {
-                return RedirectToAction("AddProduct");
+                ModelState.AddModelError("", "Invalid Username or Password");
+                return RedirectToAction("AdminLogin");
             }
-            
+
+        }
+        public ActionResult AdminLogout()
+        {
+            FormsAuthentication.SignOut();
+            return View("AdminLogin");
         }
     }
+
+   
 }
