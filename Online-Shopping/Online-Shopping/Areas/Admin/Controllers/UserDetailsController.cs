@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Configuration;
 using Online_Shopping.Models;
+using BusinessLayer;
 
 namespace Online_Shopping.Areas.Admin.Controllers
 {
@@ -16,7 +17,7 @@ namespace Online_Shopping.Areas.Admin.Controllers
         // GET: Admin/UserDetails
         public ActionResult UserDetails()
         {
-            using (var cn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+            using (var cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ServiceLayer"].ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand("select * from Registration", cn);
                 cn.Open();

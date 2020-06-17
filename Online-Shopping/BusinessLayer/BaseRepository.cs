@@ -16,7 +16,7 @@ namespace BusinessLayer
 
         public BaseRepository()
         {
-            con = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString);
+            con = new SqlConnection(ConfigurationManager.ConnectionStrings["ServiceLayer"].ConnectionString);
         }
 
         public SqlCommand GetCommand(string commandName)

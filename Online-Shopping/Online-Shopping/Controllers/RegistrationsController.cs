@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BusinessLayer.Model;
 using Online_Shopping.Models;
 
 namespace Online_Shopping.Controllers
@@ -17,6 +19,7 @@ namespace Online_Shopping.Controllers
         {
             return View(new Registration());
         }
+
         [HttpPost]
         public ActionResult UserRegistration(Registration regi)
         {
@@ -41,5 +44,32 @@ namespace Online_Shopping.Controllers
             return RedirectToAction("UserRegistration");
         }
 
+        public ActionResult ViewProduct()
+        {
+            using (var cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ServiceLayer"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand("Select * from Products", cn);
+                cn.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                List<ProductDetails> model = new List<ProductDetails>();
+                while (rdr.Read())
+                {
+
+                    var detail = new ProductDetails();
+                    detail.ProductId = Convert.ToInt32(rdr["ProductId"].ToString());
+                    detail.ProductName = rdr["ProductName"].ToString();
+                    detail.ProductDescription = rdr["ProductDescription"].ToString();
+                    detail.Quantity = Convert.ToInt32(rdr["Quantity"].ToString());
+                    detail.Image = rdr["Image"].ToString();
+                    detail.StrikeCost = Convert.ToInt32(rdr["StrikeCost"].ToString());
+                    detail.ProductCost = Convert.ToInt32(rdr["ProductCost"].ToString());
+                    detail.MainCategory = Convert.ToInt32(rdr["MainCategory"].ToString());
+                    detail.SubCategory = Convert.ToInt32(rdr["SubCategory"].ToString());
+
+                    model.Add(detail);
+                }
+                return View(model);
+            }
+        }
     }
 }

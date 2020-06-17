@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Model;
+using Microsoft.VisualStudio.Services.DelegatedAuthorization;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,7 +12,7 @@ namespace BusinessLayer
 {
     public class ServiceLayer:DbContext
     {
-        public DbSet<ProductDetails> product { get; set; }
+        public DbSet<ProductDetails> productDetails { get; set; }
 
         private Repository repository;
 
@@ -27,6 +28,11 @@ namespace BusinessLayer
         public bool UpdateProduct(ProductDetails productDetails)
         {
             return repository.UpdateProduct(productDetails);
+        }
+
+        public bool DeleteProduct(int id)
+        {
+            return repository.DeleteProduct(id);
         }
 
         public bool AdminAuthentications(string userName,string Password)

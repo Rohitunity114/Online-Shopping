@@ -638,6 +638,7 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_adminLayout.cshtml" />
     <Content Include="Views\Registrations\UserRegistration.cshtml" />
+    <Content Include="Views\Registrations\ViewProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

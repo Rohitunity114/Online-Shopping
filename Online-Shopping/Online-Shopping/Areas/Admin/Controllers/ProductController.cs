@@ -22,7 +22,7 @@ namespace Online_Shopping.Areas.Admin.Controllers
         // GET: Admin/Product
         public ActionResult ViewProduct(int? page)
         {
-            using (var cn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
+            using (var cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ServiceLayer"].ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand("Select * from Products", cn);
                 cn.Open();
@@ -64,21 +64,12 @@ namespace Online_Shopping.Areas.Admin.Controllers
             return RedirectToAction("AddProduct");
         }
        
+        [HttpGet]
         public ActionResult UpdateProduct(int id)
         {
-            
-            DataTable dt = new DataTable();
-            using (var cn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString))
-            {
-                cn.Open();
-                SqlCommand cmd = new SqlCommand("Select * from Products where ProductId=@ProductId", cn);
-                cmd.Parameters.AddWithValue("@ProductId", id);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-               
-                da.Fill(ds);
-                return View(ds);
-            }
+            ServiceLayer serviceLayer = new ServiceLayer();
+            ProductDetails productDetail= serviceLayer.productDetails.Single(x => x.ProductId == id);
+            return View(productDetail);
         }
 
         [HttpPost]
@@ -89,8 +80,12 @@ namespace Online_Shopping.Areas.Admin.Controllers
             return RedirectToAction("AddProduct");
         }
 
-
-
+        public ActionResult DeleteProduct(int id)
+        {
+            ServiceLayer serviceLayer = new ServiceLayer();
+            serviceLayer.DeleteProduct(id);
+            return RedirectToAction("AddProduct");
+        }
 
         [HttpGet]
         public ActionResult AdminLogin()

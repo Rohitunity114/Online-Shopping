@@ -14,7 +14,7 @@ namespace Online_Shopping.Models
         public int Userid { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public long Mobile { get; set; }
+        public decimal Mobile { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }

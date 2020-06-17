@@ -8,83 +8,83 @@
 }
 <div class="inbox">
 
-
-    <h2>View Product</h2>
+<h2>View Product</h2>
 
     <table class="table" align="center">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model[0].ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].ProductDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].Image)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].StrikeCost)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].ProductCost)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].MainCategory)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].SubCategory)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
             <tr>
-                @Html.HiddenFor(modelItem => item.ProductId)
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    <style>
-                        .zoom {
-                            transition: transform .7s; /* Animation */
-                        }
-
-                            .zoom:hover {
-                                transform: scale(1.5);
-                            }
-                    </style>
-                    <div class="zoom">
-                        <img src="@Url.Content(item.Image)" height="100" width="100" />
-                    </div>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StrikeCost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductCost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MainCategory)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SubCategory)
-                </td>
-                <td>
-                    @Html.ActionLink("Update", "UpdateProduct", new { id = item.ProductId })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].ProductDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].StrikeCost)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].ProductCost)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].MainCategory)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].SubCategory)
+                </th>
+                <th></th>
             </tr>
-        }
 
-    </table>
-    @Html.PagedListPager(Model, Page => Url.Action("ViewProduct",new{Page,Sorting_Order= ViewBag.CurrentSortOrder, Filter_Value = ViewBag.FilterValue }))
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @Html.HiddenFor(modelItem => item.ProductId)
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        <style>
+                            .zoom {
+                                transition: transform .7s; /* Animation */
+                            }
+
+                                .zoom:hover {
+                                    transform: scale(1.5);
+                                }
+                        </style>
+                        <div class="zoom">
+                            <img src="@Url.Content(item.Image)" height="100" width="100" />
+                        </div>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StrikeCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MainCategory)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubCategory)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Update", "UpdateProduct", new { id = item.ProductId })
+                        @Html.ActionLink("Delete", "DeleteProduct", new { id = item.ProductId })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    @Html.PagedListPager(Model, Page => Url.Action("ViewProduct", new { Page, Sorting_Order = ViewBag.CurrentSortOrder, Filter_Value = ViewBag.FilterValue }))
 </div>

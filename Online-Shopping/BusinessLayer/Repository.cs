@@ -43,6 +43,15 @@ namespace BusinessLayer
             con.Close();
             return rowAffected > 0 ? true : false;
         }
+        public bool DeleteProduct(int id)
+        {
+            SqlCommand cmd = GetCommand("spDeleteProduct");
+            cmd.Parameters.AddWithValue("@ProductId", id);
+            int rowAffected = cmd.ExecuteNonQuery();
+            con.Close();
+            return rowAffected > 0 ? true : false;
+        }
+
 
         public bool AdminAuthentication(string UserName,string Password)
         {
