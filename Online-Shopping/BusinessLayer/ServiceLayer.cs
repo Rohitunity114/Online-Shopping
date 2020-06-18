@@ -39,5 +39,10 @@ namespace BusinessLayer
         {
             return repository.AdminAuthentication(userName, Password);
         }
+
+        public bool UserAuthentications(string Email,string Password)
+        {
+            return repository.UserAuthentication(Email, Password);
+        }
     }
 }

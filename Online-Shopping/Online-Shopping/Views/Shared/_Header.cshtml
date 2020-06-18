@@ -5,9 +5,18 @@
         </div>
         <div class="agile-login">
             <ul>
-                <li><a href="~/HtmlTemplate/registered.html"> Create Account </a></li>
-                <li><a href="~/HtmlTemplate/login.html">Login</a></li>
+                <li><a href="~/Registrations/UserRegistration"> Create Account </a></li>
                 <li><a href="~/HtmlTemplate/contact.html">Help</a></li>
+                <li><a href="~/Admin/Product/AdminLogin">Admin</a></li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a>@User.Identity.Name</a></li>
+                    <li>@Html.ActionLink("Logout", "Logout", "Registrations")</li>
+                }
+                else
+                {
+                    <li><a href="~/Registrations/UserLogin">Login</a></li>
+                }
             </ul>
         </div>
         <div class="product_list_header">

@@ -67,5 +67,19 @@ namespace BusinessLayer
             return ReturnCode == 1;
 
         }
+
+        public bool UserAuthentication(string Email,string Password)
+        {
+            SqlCommand cmd = GetCommand("spUserLogin");
+            SqlParameter paraEmail = new SqlParameter("@Email", Email);
+            SqlParameter paraPassword = new SqlParameter("@Password", Password);
+
+            cmd.Parameters.Add(paraEmail);
+            cmd.Parameters.Add(paraPassword);
+
+            int rowAffected = (int)cmd.ExecuteScalar();
+            con.Close();
+            return rowAffected > 0 ? true : false;
+        }
     }
 }

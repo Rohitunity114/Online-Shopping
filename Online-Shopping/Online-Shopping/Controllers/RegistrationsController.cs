@@ -5,8 +5,10 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BusinessLayer;
 using BusinessLayer.Model;
 using Online_Shopping.Models;
+using System.Web.Security;
 
 namespace Online_Shopping.Controllers
 {
@@ -41,7 +43,7 @@ namespace Online_Shopping.Controllers
 
                 cmd.ExecuteNonQuery();
             }
-            return RedirectToAction("UserRegistration");
+            return RedirectToAction("UserLogin");
         }
 
         public ActionResult ViewProduct()
@@ -70,6 +72,43 @@ namespace Online_Shopping.Controllers
                 }
                 return View(model);
             }
+        }
+
+        
+        public ActionResult View(int id)
+        {
+            ServiceLayer serviceLayer = new ServiceLayer();
+            ProductDetails productDetails= serviceLayer.productDetails.Single(x => x.ProductId == id);
+            return View(productDetails);
+        }
+
+        [HttpGet]
+        public ActionResult UserLogin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UserLogin(string Email,string Password)
+        {
+            ServiceLayer serviceLayer = new ServiceLayer();
+            bool success = serviceLayer.UserAuthentications(Email, Password);
+            if(success)
+            {
+                FormsAuthentication.SetAuthCookie(Email, false);
+                return RedirectToAction("ViewProduct");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Your Password or UserName is Invalid");
+                return RedirectToAction("UserLogin");
+            }
+        }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("UserLogin");
         }
     }
 }
