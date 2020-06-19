@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Configuration;
 using Online_Shopping.Models;
 using BusinessLayer;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Online_Shopping.Areas.Admin.Controllers
 {
@@ -15,7 +14,7 @@ namespace Online_Shopping.Areas.Admin.Controllers
     {      
         [Authorize]
         // GET: Admin/UserDetails
-        public ActionResult UserDetails()
+        public ActionResult UserDetails(int? page)
         {
             using (var cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ServiceLayer"].ConnectionString))
             {
@@ -25,6 +24,7 @@ namespace Online_Shopping.Areas.Admin.Controllers
                 List<Registration> rigi = new List<Registration>();
                 while (rdr.Read())
                 {
+                  
                     var details = new Registration();
                     details.Userid = Convert.ToInt32(rdr["Userid"].ToString());
                     details.FirstName = rdr["FirstName"].ToString();
@@ -40,9 +40,8 @@ namespace Online_Shopping.Areas.Admin.Controllers
 
                     rigi.Add(details);
                 }
-                return View(rigi);
+                return View(rigi.ToPagedList(page ??1,3));
             }
-
         }       
     }
 }

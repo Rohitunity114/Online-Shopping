@@ -5,18 +5,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="top-brands">
-        <div class="container">
-            <h2> Products </h2>
-            <div class="grid_3 grid_5">
-                <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">                   
-                    <div id="myTabContent" class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade in active" id="expeditions" aria-labelledby="expeditions-tab">                           
-                            @{
-                                int count = 0;
-                            }
-                            @foreach (var item in Model)
-                            {                                
+
+<div class="top-brands">
+    <div class="container">
+        <h2> Products </h2>
+        <div class="grid_3 grid_5">
+            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                <div id="myTabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="expeditions" aria-labelledby="expeditions-tab">
+                        @{
+                            int count = 0;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            using (Html.BeginForm("View", "Registrations", new { id = item.ProductId }))
+                            {
                                 if ((count % 3) == 0)
                                 {
                                     <div class="clearfix"> </div>
@@ -32,9 +35,8 @@
                                                     <figure>
                                                         <div class="snipcart-item block">
                                                             <div class="ban-top">
-                                                                <a href="#"><img alt=" " src="@Url.Content(item.Image)" height="300" width="150" /></a>                                                                
-                                                                <p style="font-size:larger"><b>@item.ProductName</b></p>
-                                                                <p>@item.ProductDescription</p>
+                                                                <a href="#"><img alt=" " src="@Url.Content(item.Image)" height="300" width="150" /></a>
+                                                                <p style="font-size:larger"><b>@item.ProductName</b></p>                                                                
                                                                 <p style="font-size:medium">
                                                                     <b>Only @item.Quantity stock left</b>
                                                                 </p>
@@ -50,7 +52,7 @@
                                                             <div class="snipcart-details top_brand_home_details">
                                                                 <form action="#" method="post">
                                                                     <fieldset>
-                                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                                        @*<input type="hidden" name="cmd" value="_cart" />
                                                                         <input type="hidden" name="add" value="1" />
                                                                         <input type="hidden" name="business" value=" " />
                                                                         <input type="hidden" name="item_name" value="Fortune Sunflower Oil" />
@@ -58,8 +60,8 @@
                                                                         <input type="hidden" name="discount_amount" value="1.00" />
                                                                         <input type="hidden" name="currency_code" value="USD" />
                                                                         <input type="hidden" name="return" value=" " />
-                                                                        <input type="hidden" name="cancel_return" value=" " />
-                                                                        <input type="submit" name="submit" value="submit" class="button" />
+                                                                        <input type="hidden" name="cancel_return" value=" " />*@
+                                                                        <input type="submit" name="submit" value="View" class="button" />
                                                                     </fieldset>
                                                                 </form>
                                                             </div>
@@ -73,11 +75,12 @@
                                 </div>
                                 count++;
                             }
-                            <div class="clearfix"> </div>
-                        </div>
+                        }
+                        <div class="clearfix"> </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 

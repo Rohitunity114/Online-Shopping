@@ -4,15 +4,18 @@
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>View</h2>
-
-<div class="products">
-    <div class="container">
+    <div class="top-brands">
+        <div class="container">
+            <h2> View </h2>
+        </div>
+    </div>
+<div class="products">    
+    <div class="container">       
         <div class="agileinfo_single">
-
             <div class="col-md-4 agileinfo_single_left">
-                <img id="example" src="@Url.Content(Model.Image)" alt=" " class="img-responsive">
+                <div class="ban-top">
+                    <img id="example" src="@Url.Content(Model.Image)" alt=" " class="img-responsive">
+                </div>
             </div>
             <div class="col-md-8 agileinfo_single_right">
                 <h2>@Html.DisplayFor(model => model.ProductName)</h2>
@@ -39,19 +42,20 @@
                 <div class="snipcart-item block">
                     <div class="snipcart-thumb agileinfo_single_right_snipcart">
                         <h4 class="m-sing">@Html.DisplayFor(model => model.ProductCost) <span>@Html.DisplayFor(model => model.StrikeCost)</span></h4>
+
                     </div>
-                    <div class="snipcart-details agileinfo_single_right_details">
-                        <form action="#" method="post">
+                    <div>
+                        <form>
                             <fieldset>
-                                <input type="hidden" name="cmd" value="_cart">
+                                @*<input type="hidden" name="cmd" value="_cart">
                                 <input type="hidden" name="add" value="1">
                                 <input type="hidden" name="business" value=" ">
-                                <input type="hidden" name="item_name" value="pulao basmati rice">
-                                <input type="hidden" name="amount" value="21.00">
+                                <input type="hidden" name="item_name" value="@Model.ProductName">
+                                <input type="hidden" name="amount" value="@Model.ProductCost">
                                 <input type="hidden" name="discount_amount" value="1.00">
                                 <input type="hidden" name="currency_code" value="USD">
                                 <input type="hidden" name="return" value=" ">
-                                <input type="hidden" name="cancel_return" value=" ">
+                                <input type="hidden" name="cancel_return" value=" ">*@
                                 <input type="submit" name="submit" value="Add to cart" class="button">
                             </fieldset>
                         </form>

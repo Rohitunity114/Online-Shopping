@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Online_Shopping.Models.Registration>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Online_Shopping.Models.Registration>
 
 @{
     ViewBag.Title = "UserDetails";
@@ -11,34 +13,34 @@
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
+                    @Html.DisplayNameFor(model => model[0].FirstName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.LastName)
+                    @Html.DisplayNameFor(model => model[0].LastName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Mobile)
+                    @Html.DisplayNameFor(model => model[0].Mobile)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Email)
+                    @Html.DisplayNameFor(model => model[0].Email)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Password)
+                    @Html.DisplayNameFor(model => model[0].Password)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ConfirmPassword)
+                    @Html.DisplayNameFor(model => model[0].ConfirmPassword)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Address)
+                    @Html.DisplayNameFor(model => model[0].Address)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ProfileImage)
+                    @Html.DisplayNameFor(model => model[0].ProfileImage)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.City)
+                    @Html.DisplayNameFor(model => model[0].City)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.State)
+                    @Html.DisplayNameFor(model => model[0].State)
                 </th>
                 <th></th>
             </tr>
@@ -85,4 +87,5 @@
             }
 
         </table>
+        @Html.PagedListPager(Model,Page=>Url.Action("UserDetails",new { Page }),new PagedListRenderOptions() { Display=PagedListDisplayMode.IfNeeded})
     </div>

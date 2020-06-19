@@ -13,7 +13,8 @@ namespace BusinessLayer
     public class ServiceLayer:DbContext
     {
         public DbSet<ProductDetails> productDetails { get; set; }
-
+       
+        
         private Repository repository;
 
         public ServiceLayer()

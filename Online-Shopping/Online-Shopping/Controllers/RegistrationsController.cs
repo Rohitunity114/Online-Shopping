@@ -9,6 +9,7 @@ using BusinessLayer;
 using BusinessLayer.Model;
 using Online_Shopping.Models;
 using System.Web.Security;
+using Microsoft.AspNet.Identity;
 
 namespace Online_Shopping.Controllers
 {
@@ -25,6 +26,7 @@ namespace Online_Shopping.Controllers
         [HttpPost]
         public ActionResult UserRegistration(Registration regi)
         {
+            
             using (SqlConnection cn = new SqlConnection(connectionString))
             {
                 cn.Open();
@@ -40,7 +42,8 @@ namespace Online_Shopping.Controllers
                 cmd.Parameters.AddWithValue("@ProfileImage", regi.ProfileImage);
                 cmd.Parameters.AddWithValue("@City", regi.City);
                 cmd.Parameters.AddWithValue("@State", regi.State);
-
+                
+               
                 cmd.ExecuteNonQuery();
             }
             return RedirectToAction("UserLogin");
@@ -78,7 +81,9 @@ namespace Online_Shopping.Controllers
         public ActionResult View(int id)
         {
             ServiceLayer serviceLayer = new ServiceLayer();
+             User.Identity.GetUserId();
             ProductDetails productDetails= serviceLayer.productDetails.Single(x => x.ProductId == id);
+
             return View(productDetails);
         }
 
