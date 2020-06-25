@@ -7,9 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using BusinessLayer;
 using BusinessLayer.Model;
-using Online_Shopping.Models;
 using System.Web.Security;
-using Microsoft.AspNet.Identity;
 
 namespace Online_Shopping.Controllers
 {
@@ -43,7 +41,6 @@ namespace Online_Shopping.Controllers
                 cmd.Parameters.AddWithValue("@City", regi.City);
                 cmd.Parameters.AddWithValue("@State", regi.State);
                 
-               
                 cmd.ExecuteNonQuery();
             }
             return RedirectToAction("UserLogin");
@@ -77,14 +74,53 @@ namespace Online_Shopping.Controllers
             }
         }
 
+        public ActionResult ViewCart(int id)
+        {
+            id = GetUserId();
+            using (var cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ServiceLayer"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand("GetCartDetails", cn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Userid", id);
+                cn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                List<ViewCart> viewCarts = new List<ViewCart>();
+                while(dr.Read())
+                {
+                    var detail = new ViewCart();                  
+                    detail.ProductName = dr["ProductName"].ToString();
+                    detail.ProductCost = Convert.ToInt32(dr["ProductCost"].ToString());
+                    detail.Image = dr["Image"].ToString();
+                    detail.Quantity = Convert.ToInt32(dr["Quantity"].ToString());
+                    viewCarts.Add(detail);
+                }
+                
+                return View(viewCarts);
+            }
+        }
+
+        public ActionResult EditCart(int id)
+        {
+            ServiceLayer serviceLayer = new ServiceLayer();
+            ViewCart cart = serviceLayer.viewCarts.Single(x => x.id == id);
+            return View("ViewCart", cart);
+        }
         
         public ActionResult View(int id)
         {
-            ServiceLayer serviceLayer = new ServiceLayer();
-             User.Identity.GetUserId();
+            ServiceLayer serviceLayer = new ServiceLayer();           
             ProductDetails productDetails= serviceLayer.productDetails.Single(x => x.ProductId == id);
-
             return View(productDetails);
+        }
+
+        [HttpPost]
+        public ActionResult InsertCart(Cart cart)
+        {
+            cart.Userid = GetUserId();
+            cart.Quantity = 1;
+            ServiceLayer serviceLayer = new ServiceLayer();
+            serviceLayer.InsertCart(cart);
+            return RedirectToAction("ViewProduct");
         }
 
         [HttpGet]
@@ -115,5 +151,15 @@ namespace Online_Shopping.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("UserLogin");
         }
+        public int GetUserId()
+        {
+            string Email = User.Identity.Name;
+            ServiceLayer serviceLayer = new ServiceLayer();
+            int Userid = serviceLayer.GetUserId(Email);
+            return Userid;
+        }
+        
+        
+
     }
 }

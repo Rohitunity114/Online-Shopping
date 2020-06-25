@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Web.Mvc;
 using System.Configuration;
-using Online_Shopping.Models;
 using BusinessLayer;
 using PagedList;
 using PagedList.Mvc;
+using BusinessLayer.Model;
 
 namespace Online_Shopping.Areas.Admin.Controllers
 {

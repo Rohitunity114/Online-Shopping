@@ -1,19 +1,14 @@
 ﻿using BusinessLayer.Model;
-using Microsoft.VisualStudio.Services.DelegatedAuthorization;
-using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
     public class ServiceLayer:DbContext
     {
         public DbSet<ProductDetails> productDetails { get; set; }
-       
+        public DbSet<Cart> carts { get; set; }
+        public DbSet<Registration> registrations { get; set; }
+        public DbSet<ViewCart> viewCarts { get; set; }
         
         private Repository repository;
 
@@ -45,5 +40,21 @@ namespace BusinessLayer
         {
             return repository.UserAuthentication(Email, Password);
         }
+
+        public bool InsertCart(Cart cart)
+        {
+            return repository.AddCart(cart);
+        }
+
+        public bool GetCart(int id)
+        {
+            return repository.GetCartDetail(id);
+        }
+        public int GetUserId(string Email)
+        {
+            return repository.GetUserId(Email);
+        }
+
+        public System.Data.Entity.DbSet<BusinessLayer.Model.ViewCart> ViewCarts { get; set; }
     }
 }

@@ -43,6 +43,34 @@ namespace BusinessLayer
             con.Close();
             return rowAffected > 0 ? true : false;
         }
+        public bool AddCart(Cart cart)
+        {
+            SqlCommand cmd = GetCommand("GetAddCart");
+            cmd.Parameters.AddWithValue("@ProductId", cart.ProductId);
+            cmd.Parameters.AddWithValue("@Userid", cart.Userid);
+            cmd.Parameters.AddWithValue("@Quantity", cart.Quantity);
+
+            int rowAffected = cmd.ExecuteNonQuery();
+            con.Close();
+            return rowAffected > 0 ? true : false;
+        }
+        public int GetUserId(string Email)
+        {
+            SqlCommand cmd = GetCommand("spGetUserId");
+            cmd.Parameters.AddWithValue("@Email", Email);            
+            int id = (int)cmd.ExecuteScalar();
+            con.Close();
+            return id;
+        }
+
+        public bool GetCartDetail(int id)
+        {
+            SqlCommand cmd = GetCommand("GetCartDetails");
+            cmd.Parameters.AddWithValue("@Userid", id);
+            int rowAffected = cmd.ExecuteNonQuery();
+            con.Close();
+            return rowAffected > 0 ? true : false;
+        }
         public bool DeleteProduct(int id)
         {
             SqlCommand cmd = GetCommand("spDeleteProduct");
@@ -65,7 +93,6 @@ namespace BusinessLayer
             int ReturnCode = (int)cmd.ExecuteScalar();
             con.Close();
             return ReturnCode == 1;
-
         }
 
         public bool UserAuthentication(string Email,string Password)

@@ -1,11 +1,12 @@
 ﻿<div class="agileits_header">
     <div class="container">
         <div class="w3l_offers">
-            <p>SALE UP TO 70% OFF. USE CODE "SALE70%" . <a href="products.html">SHOP NOW</a></p>
+            <p>SALE UP TO 70% OFF. USE CODE "SALE70%" . <a href="~/Registrations/ViewCart">SHOP NOW</a></p>
         </div>
         <div class="agile-login">
             <ul>
                 <li><a href="~/Registrations/UserRegistration"> Create Account </a></li>
+                <li><a href="~/Registrations/ViewProduct"> Home </a></li>
                 <li><a href="~/HtmlTemplate/contact.html">Help</a></li>
                 <li><a href="~/Admin/Product/AdminLogin">Admin</a></li>
                 @if (User.Identity.IsAuthenticated)
@@ -20,11 +21,32 @@
             </ul>
         </div>
         <div class="product_list_header">
-            <form action="#" method="post" class="last">
-                <input type="hidden" name="cmd" value="_cart">
-                <input type="hidden" name="display" value="1">
-                <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-            </form>
+            <style>
+                a:link {
+                    color: green;
+                    background-color: transparent;
+                    text-decoration: none;
+                }
+
+                a:visited {
+                    color: white;
+                    background-color: transparent;
+                    text-decoration: none;
+                }
+
+                a:hover {
+                    color: yellow;
+                    background-color: transparent;
+                    text-decoration: underline;
+                }
+
+                a:active {
+                    color: yellow;
+                    background-color: transparent;
+                    text-decoration: underline;
+                }
+            </style>            
+                <a href="~/Registrations/ViewCart/1" class="fa fa-cart-arrow-down" aria-hidden="true"><b> Your Cart </b></a>            
         </div>
         <div class="clearfix"> </div>
     </div>
