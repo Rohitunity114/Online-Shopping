@@ -1,15 +1,20 @@
 ﻿@model IEnumerable<BusinessLayer.Model.ViewCart>
 
+
 @{
     ViewBag.Title = "ViewCart";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Buttoncss/css/hover-min.css" rel="stylesheet" />
+
 
 <div class="top-brands">
     <div class="container">
         <h2> Your Cart </h2>
     </div>
 </div>
+
+
 <table class="table">
     <tr>
         <th>
@@ -24,35 +29,46 @@
         <th>
             @Html.DisplayNameFor(model => model.Quantity)
         </th>
+        <th>
+            <label>
+                <b>Total</b>
+            </label>
+        </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductCost)
-            </td>
-            <td>
-                <img src="@Url.Content(@item.Image)" height="100" width="100" />
-            </td>
-            <td>
-                @Html.TextBoxFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditCart", new { id=item.id})
-                @Html.ActionLink("Delete", "DeleteCart", new { id=item.id})
-            </td>
-        </tr>
+        using (Html.BeginForm("EditCart", "Registrations",new { id=item.Cartid,Quantity=item.Quantity}, FormMethod.Post))
+        {
+            <tr>
+                @Html.HiddenFor(modelItem => item.Cartid)
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductCost)
+                </td>
+                <td>
+                    <img src="@Url.Content(@item.Image)" height="100" width="100" />
+                </td>
+                <td>
+                    <input name="Quantity" value="@item.Quantity" />
+                    <input type="submit" name="Update" value="Update" />
+                </td>
+                <td>
+                    @((item.ProductCost * item.Quantity).ToString())
+                </td>
+                <td>
+                    @Html.ActionLink("Delete","DeleteCart",new { id = item.Cartid },new { @class="hvr-grow"})
+                    @*<input type="submit" value="Delete" onclick="location.href='@Url.Action("DeleteCart", "Registrations", new { id = item.Cartid })'" class="hvr-grow" />*@
+                </td>
+            </tr>
+        }
     }
 
 </table>
 
-
-
-
-
-
+    <div class="form-group">
+        <input type="submit" value="Place Oreder" class="btn btn-default" />
+    </div>

@@ -54,6 +54,15 @@ namespace BusinessLayer
             con.Close();
             return rowAffected > 0 ? true : false;
         }
+
+        public bool DeleteCart(int id)
+        {
+            SqlCommand cmd = GetCommand("DeleteCart");
+            cmd.Parameters.AddWithValue("Cartid", id);
+            int rowAffected = cmd.ExecuteNonQuery();
+            con.Close();
+            return rowAffected > 0 ? true : false;
+        }
         public int GetUserId(string Email)
         {
             SqlCommand cmd = GetCommand("spGetUserId");
@@ -79,7 +88,15 @@ namespace BusinessLayer
             con.Close();
             return rowAffected > 0 ? true : false;
         }
-
+        public bool UpdateCart(int id,int Quantity)
+        {
+            SqlCommand cmd = GetCommand("UpdateCart");
+            cmd.Parameters.AddWithValue("@Quantity", Quantity);
+            cmd.Parameters.AddWithValue("@Cartid", id);
+            int rowAffected = cmd.ExecuteNonQuery();
+            con.Close();
+            return rowAffected > 0 ? true : false;
+        }
 
         public bool AdminAuthentication(string UserName,string Password)
         {

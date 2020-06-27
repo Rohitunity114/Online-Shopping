@@ -10,6 +10,7 @@ namespace BusinessLayer
         public DbSet<Registration> registrations { get; set; }
         public DbSet<ViewCart> viewCarts { get; set; }
         
+
         private Repository repository;
 
         public ServiceLayer()
@@ -50,11 +51,19 @@ namespace BusinessLayer
         {
             return repository.GetCartDetail(id);
         }
+        public bool DeleteCart(int id)
+        {
+            return repository.DeleteCart(id);
+        }
+        public bool UpdateCart(int id,int Qty)
+        {
+            return repository.UpdateCart(id, Qty);
+        }
         public int GetUserId(string Email)
         {
             return repository.GetUserId(Email);
         }
 
-        public System.Data.Entity.DbSet<BusinessLayer.Model.ViewCart> ViewCarts { get; set; }
+        
     }
 }

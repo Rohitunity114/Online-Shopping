@@ -11,6 +11,7 @@ namespace BusinessLayer.Model
     {
         [Key]
         public int id { get; set; }
+        public int Cartid { get; set; }
         public int Userid { get; set; }
         public string ProductName { get; set; }
         public int ProductCost { get; set; }
